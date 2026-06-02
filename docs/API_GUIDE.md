@@ -1,5 +1,6 @@
 # StockFlow API Guide
 
+Base URL (production): `https://wexa.voltrify.in/api`
 Base URL (local): `http://127.0.0.1:8000/api`
 
 All responses are JSON. Authentication uses JWT Bearer tokens (via
@@ -10,11 +11,11 @@ request:
 Authorization: Bearer <access_token>
 ```
 
-Interactive docs:
+Interactive docs (live):
 
-- Swagger UI: `/api/docs/`
-- ReDoc: `/api/redoc/`
-- OpenAPI schema: `/api/schema/`
+- Swagger UI: https://wexa.voltrify.in/api/docs/
+- ReDoc: https://wexa.voltrify.in/api/redoc/
+- OpenAPI schema: https://wexa.voltrify.in/api/schema/
 
 ## Authentication
 

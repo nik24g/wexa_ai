@@ -7,6 +7,20 @@ signed-in user's organization, so one org can never see another org's data.
 
 Built for the Wexa AI Full Stack Developer assessment (Phase 1, the 6-hour MVP).
 
+## Live Demo
+
+- **App:** https://wexa.voltrify.in
+- **API docs (Swagger):** https://wexa.voltrify.in/api/docs/
+- **API docs (ReDoc):** https://wexa.voltrify.in/api/redoc/
+- **Django admin:** https://wexa.voltrify.in/admin/
+
+You can sign up to create your own organization, or log in with the seeded demo
+account:
+
+| Email                | Password       |
+| -------------------- | -------------- |
+| `demo@stockflow.com` | `DemoPass123!` |
+
 ## Tech Stack
 
 | Layer    | Technology |
@@ -86,11 +100,11 @@ configure. For production, point the frontend at the deployed backend by setting
 
 ## API Documentation
 
-The backend serves interactive docs:
+The backend serves interactive docs (live and locally):
 
-- Swagger UI: http://127.0.0.1:8000/api/docs/
-- ReDoc: http://127.0.0.1:8000/api/redoc/
-- Raw OpenAPI schema: http://127.0.0.1:8000/api/schema/
+- Swagger UI: https://wexa.voltrify.in/api/docs/ (local: http://127.0.0.1:8000/api/docs/)
+- ReDoc: https://wexa.voltrify.in/api/redoc/ (local: http://127.0.0.1:8000/api/redoc/)
+- Raw OpenAPI schema: https://wexa.voltrify.in/api/schema/
 
 There's also a written endpoint reference in [`docs/API_GUIDE.md`](docs/API_GUIDE.md).
 
@@ -119,7 +133,8 @@ another organization's data.
 
 ## Deployment (AWS EC2)
 
-The app is deployed on a single Ubuntu EC2 instance:
+The app is deployed on a single Ubuntu EC2 instance and reachable at
+https://wexa.voltrify.in.
 
 - Nginx serves the built React app and reverse-proxies `/api`, `/admin`, and
   `/static` to Gunicorn (single origin, so no CORS needed).
@@ -133,7 +148,7 @@ systemd unit and Nginx config live in [`deploy/`](deploy/).
 
 ## Submission checklist
 
-- [ ] GitHub repository link
-- [ ] Deployed frontend URL
-- [ ] Deployed backend/API URL
+- [x] GitHub repository: https://github.com/nik24g/wexa_ai
+- [x] Deployed app (frontend): https://wexa.voltrify.in
+- [x] Deployed API: https://wexa.voltrify.in/api/ (docs at `/api/docs/`)
 - [x] API guide / documentation (`docs/API_GUIDE.md` + Swagger UI)

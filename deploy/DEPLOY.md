@@ -48,15 +48,22 @@ python -c "import secrets; print(secrets.token_urlsafe(50))"
 ```
 
 Create `~/wexa_ai/backend/.env` (use `deploy/env.production.example` as a
-reference):
+reference). `DJANGO_ALLOWED_HOSTS` must contain whatever host users type in the
+browser (your domain and/or the EC2 IP), and `CSRF_TRUSTED_ORIGINS` must include
+the full origin with scheme:
 
 ```
 DJANGO_SECRET_KEY=<paste the generated key>
 DJANGO_DEBUG=False
-DJANGO_ALLOWED_HOSTS=YOUR_EC2_PUBLIC_IP,127.0.0.1
-CSRF_TRUSTED_ORIGINS=http://YOUR_EC2_PUBLIC_IP
+DJANGO_ALLOWED_HOSTS=wexa.voltrify.in,127.0.0.1
+CSRF_TRUSTED_ORIGINS=https://wexa.voltrify.in
 DEFAULT_LOW_STOCK_THRESHOLD=5
 ```
+
+> If you reach the site by IP instead of a domain, put that IP in
+> `DJANGO_ALLOWED_HOSTS`. A wrong/missing host is the usual cause of a plain
+> "Bad Request (400)" page. If TLS is terminated by a proxy in front of EC2
+> (e.g. Cloudflare), use the `https://` origin in `CSRF_TRUSTED_ORIGINS`.
 
 ## 5. Backend: migrate, collect static, seed
 
