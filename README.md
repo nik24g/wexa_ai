@@ -117,17 +117,19 @@ set server-side on create (never trusted from the request body). SKU uniqueness
 is a per-org database constraint. The result is that a user can't read or write
 another organization's data.
 
-## Deployment (AWS)
+## Deployment (AWS EC2)
 
-Local dev runs on SQLite. The plan for AWS, which doesn't require code changes:
+The app is deployed on a single Ubuntu EC2 instance:
 
-- **Backend:** Django behind Gunicorn on Elastic Beanstalk (or EC2). Switch
-  SQLite to Amazon RDS (PostgreSQL) by setting the DB config via env vars.
-- **Frontend:** `npm run build`, then serve the static `dist/` from S3 +
-  CloudFront.
-- **Config:** `DJANGO_SECRET_KEY`, `DJANGO_DEBUG=False`, `DJANGO_ALLOWED_HOSTS`,
-  `CORS_ALLOWED_ORIGINS`, and DB credentials all come from environment variables,
-  never committed.
+- Nginx serves the built React app and reverse-proxies `/api`, `/admin`, and
+  `/static` to Gunicorn (single origin, so no CORS needed).
+- Gunicorn runs Django under a systemd service.
+- SQLite is the database; Django's static files are served by WhiteNoise.
+- Config (`DJANGO_SECRET_KEY`, `DJANGO_DEBUG=False`, `DJANGO_ALLOWED_HOSTS`,
+  `CSRF_TRUSTED_ORIGINS`) comes from `backend/.env`, which is never committed.
+
+Step-by-step instructions are in [`deploy/DEPLOY.md`](deploy/DEPLOY.md). The
+systemd unit and Nginx config live in [`deploy/`](deploy/).
 
 ## Submission checklist
 

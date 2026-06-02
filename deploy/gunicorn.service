@@ -1,0 +1,17 @@
+[Unit]
+Description=StockFlow Gunicorn (Django)
+After=network.target
+
+[Service]
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/home/ubuntu/wexa_ai/backend
+ExecStart=/home/ubuntu/wexa_ai/backend/venv/bin/gunicorn \
+    --workers 3 \
+    --bind 127.0.0.1:8000 \
+    stockflow.wsgi:application
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
